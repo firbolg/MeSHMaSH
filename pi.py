@@ -59,11 +59,10 @@ def PI_dict(term):
             dict[i] += 1
         else:
             dict[i] = 1
-    PI_sum = sum(dict.values())
+    return dict
 
-    return dict, PI_sum
+#print(PI_dict(newterm))
 
-print(PI_dict(newterm))
 #TODO create dataframe with all desired outputs
 #create dataframe with cols: #1 word/%/#2 word/%/#3 word/%/#4 word/%/#5 word/%...#10 word/%/total count of MeSH occurrences 
 #create new row, but newterm in first column
@@ -75,6 +74,23 @@ print(PI_dict(newterm))
 #if empty, put key there
 #put value in next column
 #take Dan's csv, to df, then concat dataframes and output as new csv
+
+def PI_report(term):
+    column_names = ['Proposed Term','1','%','2','%','3','%','4','%','5','%','6','%','7','%','8','%','9','%','10','%','11','%','12','%','13','%','14','%','15','%','Total PIs']
+    df = pd.DataFrame(columns = column_names)
+
+    PIs = PI_dict(term)
+    PIs = dict(sorted(PIs.items(), key=lambda item: item[1], reverse=True))
+    #PIs = dict(sorted(PIs.items(), reverse=True, key=lambda t: t[::-1]))
+    total = sum(PIs.values())
+    for key, value in PIs.items():
+        pct = value * 100 / total
+        PIs[key] = round(pct, 2)
+    return PIs, total
+
+print(PI_report(newterm))
+
+
 
 #TODO create visualizations of PIs
 #for each row of previous dataframe:
