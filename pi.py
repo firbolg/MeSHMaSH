@@ -51,8 +51,19 @@ def getPIs(term):
             word_lst = word_lst + words
         return word_lst
 
+def PI_dict(term):
+    dict = {}
+    PIs = getPIs(term)
+    for i in PIs:
+        if i in dict:
+            dict[i] += 1
+        else:
+            dict[i] = 1
+    PI_sum = sum(dict.values())
 
+    return dict, PI_sum
 
+print(PI_dict(newterm))
 #TODO create dataframe with all desired outputs
 #create dataframe with cols: #1 word/%/#2 word/%/#3 word/%/#4 word/%/#5 word/%...#10 word/%/total count of MeSH occurrences 
 #create new row, but newterm in first column
