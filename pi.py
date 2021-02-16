@@ -75,22 +75,38 @@ def PI_dict(term):
 #put value in next column
 #take Dan's csv, to df, then concat dataframes and output as new csv
 
-def PI_report(term):
-    column_names = ['Proposed Term','1','%','2','%','3','%','4','%','5','%','6','%','7','%','8','%','9','%','10','%','11','%','12','%','13','%','14','%','15','%','Total PIs']
-    df = pd.DataFrame(columns = column_names)
+@RateLimiter(max_calls=10, period=1)
+def PI_data(term):
 
     PIs = PI_dict(term)
-    PIs = dict(sorted(PIs.items(), key=lambda item: item[1], reverse=True))
-    #PIs = dict(sorted(PIs.items(), reverse=True, key=lambda t: t[::-1]))
+
+    PIs = dict(sorted(PIs.items(), reverse=True, key=lambda t: t[::-1]))
+
     total = sum(PIs.values())
+
     for key, value in PIs.items():
         pct = value * 100 / total
         PIs[key] = round(pct, 2)
-    return PIs, total
 
-print(PI_report(newterm))
+    PI_k = sorted(PIs, key=lambda x: (-PIs[x], x))
+    PI_v = list(PIs.values())
+
+    PI_sorted_dict = {'Term 1':PI_k[0], '% 1':PI_v[0], 'Term 2':PI_k[1], '% 2':PI_v[1], 'Term 3':PI_k[2], '% 3':PI_v[2],
+                      'Term 4':PI_k[3],'% 4':PI_v[3], 'Term 5':PI_k[4], '% 5':PI_v[4], 'Term 6':PI_k[5], '% 6':PI_v[5], 
+                      'Term 7':PI_k[6], '% 7': PI_v[6], 'Term 8':PI_k[7], '% 8':PI_v[7], 'Term 9':PI_k[8], '% 9':PI_v[8], 
+                      'Term 10':PI_k[9], '% 10':PI_v[9], 'Term 11':PI_k[10], '% 11':PI_v[10], 'Term 12':PI_k[11], '% 12':PI_v[11], 
+                      'Term 13':PI_k[12], '% 13':PI_v[12], 'Term 14':PI_k[13], '% 14':PI_v[13], 'Term 15':PI_k[14], '% 15':PI_v[14],
+                      'Total PIs':total}
+
+    df = pd.DataFrame([PI_sorted_dict])
 
 
+
+    return df 
+
+
+
+    
 
 #TODO create visualizations of PIs
 #for each row of previous dataframe:
