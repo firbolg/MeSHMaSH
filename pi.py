@@ -98,7 +98,7 @@ df_report = PI_report(newterms)
 
 df = pd.concat([df_source, df_report], axis=1)
 
-df.to_csv('top 10 PIs.csv', index=False)
+df.to_csv('SP and SDOH with Postings and PIs.csv', index=False)
 
 
 
