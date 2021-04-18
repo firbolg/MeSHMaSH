@@ -4,8 +4,8 @@ import pandas as pd
 import re
 import pubmed_parser as pp
 
-Entrez.email = 'levijdolan@gmail.com'
-api_key = 'c34c74b04d76cdf36ea6835f39e191a3a108'
+Entrez.email = '***@gmail.com'
+api_key = '***'
 
 
 def getMEDLINE(term):
