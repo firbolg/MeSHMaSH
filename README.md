@@ -1,6 +1,6 @@
 ## MeSHMaSH
 
-A script for comparing existing MeSH indexing for emerging social determinants of health (SDOH) concepts.
+A script for comparing existing MeSH indexing for emerging social determinants of health (SDOH) concepts using the Biopython library. 
 
 -Checks titles of all articles in PubMed for a list of SDOH terms which are NOT in MeSH
 <br>-Checks this set of articles for MeSH terms
